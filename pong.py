@@ -20,12 +20,36 @@ def draw():
     screen.draw.filled_rect(ball, ball_colour)
 
 def update():
+    global ball_velocity
     x, y = ball_velocity
     ball.left += x
     ball.top += y
 
+    # Bounce
+    if ball.right > WIDTH:
+        displacement = ball.right - WIDTH
+        ball.right -= displacement
+        ball_velocity = (ball_velocity[0] * -1,
+                         ball_velocity[1])
+    if ball.left < 0:
+        displacement = 0 - ball.left
+        ball.left += displacement
+        ball_velocity = (ball_velocity[0] * -1,
+                         ball_velocity[1])
+    if ball.bottom > HEIGHT:
+        displacement = ball.bottom - HEIGHT
+        ball.bottom -= displacement
+        ball_velocity = (ball_velocity[0],
+                         ball_velocity[1] * -1)
+    if ball.top < 0:
+        displacement = 0 - ball.top
+        ball.top += displacement
+        ball_velocity = (ball_velocity[0],
+                         ball_velocity[1] * -1)
+
+
 def on_key_down(key):
     if key == keys.UP:
-        box.top -= 2
+        left_paddle.top -= 2
     if key == keys.DOWN:
-        box.top += 2
+        left_paddle.top += 2

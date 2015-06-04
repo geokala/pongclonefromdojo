@@ -47,9 +47,19 @@ def update():
         ball_velocity = (ball_velocity[0],
                          ball_velocity[1] * -1)
 
+    # paddle collision
+    if (ball.left < left_paddle.right and 
+       ball.top > left_paddle.top and
+       ball.bottom < left_paddle.bottom):
+        displacement = left_paddle.right - ball.left
+        ball.left += displacement
+        ball_velocity = (ball_velocity[0] * -1,
+                         ball_velocity[1])
+        
+
 
 def on_key_down(key):
     if key == keys.UP:
-        left_paddle.top -= 2
+        left_paddle.top -= 5
     if key == keys.DOWN:
-        left_paddle.top += 2
+        left_paddle.top += 5

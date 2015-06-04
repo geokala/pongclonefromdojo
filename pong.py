@@ -60,6 +60,6 @@ def update():
 
 def on_key_down(key):
     if key == keys.UP:
-        left_paddle.top -= 5
+        left_paddle.top -= 10
     if key == keys.DOWN:
-        left_paddle.top += 5
+        left_paddle.top += 10
